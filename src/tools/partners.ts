@@ -11,7 +11,7 @@ import {
   PayoutListInput,
 } from "../schemas/partner.js";
 import type { Bounty, Commission, Partner, Payout } from "../types/revroute.js";
-import { jsonContent, type ToolRegistry } from "./_register.js";
+import { type ToolRegistry, jsonContent } from "./_register.js";
 
 // Partner-program endpoints in revroute are flat — there's no `/programs/{id}/...` prefix
 // and no list-programs API. Each workspace has a single implicit program, identified by
@@ -57,10 +57,9 @@ export function registerPartnerTools(reg: ToolRegistry): void {
     handler: async (args, ctx) => {
       const ident = args.id ?? args.partnerId;
       if (ident) {
-        const data = await ctx.client.get<Partner>(
-          `/partners/${encodeURIComponent(ident)}`,
-          { apiKey: ctx.apiKey },
-        );
+        const data = await ctx.client.get<Partner>(`/partners/${encodeURIComponent(ident)}`, {
+          apiKey: ctx.apiKey,
+        });
         return jsonContent(data);
       }
       // Fallback: lookup by tenantId via query
@@ -77,7 +76,11 @@ export function registerPartnerTools(reg: ToolRegistry): void {
     description: "Update partner fields including status (approve / ban / reject).",
     inputSchema: PartnerUpdateInput,
     handler: async (args, ctx) => {
-      const ident = args.id ?? args.partnerId!;
+      const ident = args.id ?? args.partnerId;
+      if (!ident) {
+        // Schema's .refine() guarantees one of these is set; this satisfies the type checker.
+        throw new Error("Provide either id or partnerId");
+      }
       const data = await ctx.client.patch<Partner>(
         `/partners/${encodeURIComponent(ident)}`,
         args.data,

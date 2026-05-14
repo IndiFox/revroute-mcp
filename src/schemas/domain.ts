@@ -32,6 +32,4 @@ export const DomainListInput = PaginationInput.extend({
   search: z.string().optional(),
 }).strict();
 
-export const DomainAvailabilityInput = z
-  .object({ slug: NonEmptyString })
-  .strict();
+export const DomainAvailabilityInput = z.object({ slug: NonEmptyString }).strict();

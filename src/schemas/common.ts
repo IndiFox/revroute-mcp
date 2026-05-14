@@ -3,13 +3,7 @@ import { z } from "zod";
 export const PaginationInput = z
   .object({
     page: z.number().int().min(1).default(1).describe("1-based page index"),
-    pageSize: z
-      .number()
-      .int()
-      .min(1)
-      .max(100)
-      .default(50)
-      .describe("Items per page (max 100)"),
+    pageSize: z.number().int().min(1).max(100).default(50).describe("Items per page (max 100)"),
   })
   .strict();
 

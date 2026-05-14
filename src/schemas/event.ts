@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { Interval, IsoDate, NonEmptyString, PaginationInput } from "./common.js";
 import { AnalyticsEvent } from "./analytics.js";
+import { Interval, IsoDate, NonEmptyString, PaginationInput } from "./common.js";
 
 export const EventListInput = PaginationInput.extend({
   event: AnalyticsEvent.default("clicks"),

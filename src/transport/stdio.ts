@@ -1,7 +1,7 @@
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
-import { createServer } from "../server.js";
 import type { ResolvedConfig } from "../config.js";
+import { createServer } from "../server.js";
 
 export async function runStdio(config: ResolvedConfig): Promise<void> {
   const { server, logger } = createServer(config);

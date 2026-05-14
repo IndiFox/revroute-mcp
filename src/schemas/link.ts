@@ -37,7 +37,9 @@ export const LinkUpsert = LinkCore.extend({
 
 export const LinkUpdate = LinkCore.partial()
   .extend({
-    id: NonEmptyString.optional().describe("Link ID (one of id, externalId, or domain+key required)"),
+    id: NonEmptyString.optional().describe(
+      "Link ID (one of id, externalId, or domain+key required)",
+    ),
     externalId: NonEmptyString.optional(),
   })
   .strict();
@@ -50,10 +52,9 @@ export const LinkIdInput = z
     key: NonEmptyString.optional(),
   })
   .strict()
-  .refine(
-    (v) => Boolean(v.id) || Boolean(v.externalId) || (v.domain && v.key),
-    { message: "Provide one of: id, externalId, or both domain+key" },
-  );
+  .refine((v) => Boolean(v.id) || Boolean(v.externalId) || (v.domain && v.key), {
+    message: "Provide one of: id, externalId, or both domain+key",
+  });
 
 export const LinkListInput = PaginationInput.extend({
   domain: NonEmptyString.optional(),
@@ -69,9 +70,11 @@ export const LinkListInput = PaginationInput.extend({
   sortOrder: SortOrderInput,
 }).strict();
 
-export const LinkCountInput = LinkListInput.partial().extend({
-  groupBy: z.enum(["domain", "tagId", "userId"]).optional(),
-}).strict();
+export const LinkCountInput = LinkListInput.partial()
+  .extend({
+    groupBy: z.enum(["domain", "tagId", "userId"]).optional(),
+  })
+  .strict();
 
 export const LinkBulkCreateInput = z
   .object({
@@ -86,10 +89,9 @@ export const LinkBulkUpdateInput = z
     externalIds: z.array(NonEmptyString).min(1).max(100).optional(),
   })
   .strict()
-  .refine(
-    (v) => Boolean(v.linkIds?.length) || Boolean(v.externalIds?.length),
-    { message: "Provide either linkIds or externalIds" },
-  );
+  .refine((v) => Boolean(v.linkIds?.length) || Boolean(v.externalIds?.length), {
+    message: "Provide either linkIds or externalIds",
+  });
 
 export const LinkBulkDeleteInput = z
   .object({

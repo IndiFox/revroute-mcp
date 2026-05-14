@@ -1,9 +1,9 @@
-import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 import { http, HttpResponse, delay } from "msw";
 import { setupServer } from "msw/node";
+import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 
-import { RevrouteClient } from "../src/client/http.js";
 import { RevrouteApiError } from "../src/client/errors.js";
+import { RevrouteClient } from "../src/client/http.js";
 
 const BASE_URL = "https://api.revroute.test";
 
@@ -66,7 +66,9 @@ describe("RevrouteClient", () => {
       http.get(`${BASE_URL}/links/missing`, () => {
         calls += 1;
         return new HttpResponse(
-          JSON.stringify({ error: { code: "not_found", message: "no such link", doc_url: "https://docs/x" } }),
+          JSON.stringify({
+            error: { code: "not_found", message: "no such link", doc_url: "https://docs/x" },
+          }),
           { status: 404, headers: { "content-type": "application/json" } },
         );
       }),

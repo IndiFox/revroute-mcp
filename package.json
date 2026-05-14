@@ -8,13 +8,7 @@
   "bin": {
     "revroute-mcp": "dist/index.js"
   },
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE",
-    "CHANGELOG.md",
-    "examples"
-  ],
+  "files": ["dist", "README.md", "LICENSE", "CHANGELOG.md", "examples"],
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsup",

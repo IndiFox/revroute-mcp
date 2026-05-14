@@ -1,6 +1,6 @@
 import { AnalyticsQueryInput } from "../schemas/analytics.js";
 import type { AnalyticsResult } from "../types/revroute.js";
-import { jsonContent, type ToolRegistry } from "./_register.js";
+import { type ToolRegistry, jsonContent } from "./_register.js";
 
 export function registerAnalyticsTools(reg: ToolRegistry): void {
   reg.define({
@@ -10,10 +10,9 @@ export function registerAnalyticsTools(reg: ToolRegistry): void {
     inputSchema: AnalyticsQueryInput,
     handler: async (args, ctx) => {
       const { maxItems, ...query } = args;
-      const data = await ctx.client.get<AnalyticsResult | { clicks: number; leads: number; sales: number }>(
-        "/analytics",
-        { query: { ...query }, apiKey: ctx.apiKey },
-      );
+      const data = await ctx.client.get<
+        AnalyticsResult | { clicks: number; leads: number; sales: number }
+      >("/analytics", { query: { ...query }, apiKey: ctx.apiKey });
 
       if (!Array.isArray(data)) {
         return jsonContent({ groupBy: args.groupBy, data });

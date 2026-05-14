@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
 
+import { AnalyticsQueryInput } from "../src/schemas/analytics.js";
 import {
   LinkBulkDeleteInput,
   LinkCreate,
   LinkIdInput,
   LinkListInput,
 } from "../src/schemas/link.js";
-import { AnalyticsQueryInput } from "../src/schemas/analytics.js";
 
 describe("LinkCreate", () => {
   it("accepts a minimal payload", () => {
@@ -72,9 +72,7 @@ describe("AnalyticsQueryInput", () => {
   });
 
   it("rejects interval combined with start/end", () => {
-    expect(() =>
-      AnalyticsQueryInput.parse({ interval: "7d", start: "2026-01-01" }),
-    ).toThrow();
+    expect(() => AnalyticsQueryInput.parse({ interval: "7d", start: "2026-01-01" })).toThrow();
   });
 
   it("rejects unknown groupBy values", () => {

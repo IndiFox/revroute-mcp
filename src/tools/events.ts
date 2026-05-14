@@ -1,6 +1,6 @@
 import { EventListInput } from "../schemas/event.js";
 import type { EventRecord } from "../types/revroute.js";
-import { jsonContent, type ToolRegistry } from "./_register.js";
+import { type ToolRegistry, jsonContent } from "./_register.js";
 
 export function registerEventTools(reg: ToolRegistry): void {
   reg.define({

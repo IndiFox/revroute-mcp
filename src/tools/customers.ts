@@ -6,7 +6,7 @@ import {
   CustomerUpdateInput,
 } from "../schemas/customer.js";
 import type { Customer } from "../types/revroute.js";
-import { jsonContent, type ToolRegistry } from "./_register.js";
+import { type ToolRegistry, jsonContent } from "./_register.js";
 
 function customerPath(args: { id?: string; externalId?: string }): string {
   if (args.id) return `/customers/${encodeURIComponent(args.id)}`;

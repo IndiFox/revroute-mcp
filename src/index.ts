@@ -1,9 +1,9 @@
 import { Command } from "commander";
 
 import { loadConfig } from "./config.js";
-import { runStdio } from "./transport/stdio.js";
-import { runHttp } from "./transport/http.js";
 import { SERVER_INFO } from "./server.js";
+import { runHttp } from "./transport/http.js";
+import { runStdio } from "./transport/stdio.js";
 
 async function main(): Promise<void> {
   const program = new Command();
@@ -11,11 +11,7 @@ async function main(): Promise<void> {
     .name("revroute-mcp")
     .description("MCP server for revroute.ru (short links, analytics, conversion tracking).")
     .version(SERVER_INFO.version)
-    .option(
-      "-t, --transport <type>",
-      "transport: stdio (default) | http",
-      "stdio",
-    )
+    .option("-t, --transport <type>", "transport: stdio (default) | http", "stdio")
     .option("-p, --port <number>", "HTTP port (default: 8787)")
     .option("-H, --host <host>", "HTTP bind host (default: 127.0.0.1)")
     .option("--base-url <url>", "override REVROUTE_API_BASE_URL")
@@ -61,7 +57,7 @@ async function main(): Promise<void> {
 
 main().catch((err) => {
   process.stderr.write(
-    `[revroute-mcp] Fatal: ${err instanceof Error ? err.stack ?? err.message : String(err)}\n`,
+    `[revroute-mcp] Fatal: ${err instanceof Error ? (err.stack ?? err.message) : String(err)}\n`,
   );
   process.exit(1);
 });

@@ -1,5 +1,5 @@
 import { QrGenerateInput } from "../schemas/qr.js";
-import { imageContent, jsonContent, type ToolRegistry } from "./_register.js";
+import { type ToolRegistry, imageContent, jsonContent } from "./_register.js";
 
 interface QrResponse {
   mimeType: string;

@@ -1,12 +1,12 @@
-import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
+import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 
+import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { RevrouteClient } from "../src/client/http.js";
 import { ToolRegistry } from "../src/tools/_register.js";
 import { registerLinkTools } from "../src/tools/links.js";
 import { createLogger } from "../src/util/logger.js";
-import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 
 const BASE_URL = "https://api.revroute.test";
 const server = setupServer();
@@ -58,10 +58,13 @@ describe("link tools", () => {
     );
     const { client, reg } = setup();
     const list = reg.list().find((t) => t.name === "revroute_link_list");
-    const result = await list!.handler({ page: 1, pageSize: 50, sort: "createdAt", sortOrder: "desc" } as any, {
-      client,
-      logger: createLogger({ debug: false }),
-    });
+    const result = await list!.handler(
+      { page: 1, pageSize: 50, sort: "createdAt", sortOrder: "desc" } as any,
+      {
+        client,
+        logger: createLogger({ debug: false }),
+      },
+    );
     const parsed = parseToolResult(result) as any;
     expect(parsed.data).toHaveLength(50);
     expect(parsed.pagination.hasMore).toBe(true);

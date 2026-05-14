@@ -26,9 +26,7 @@ export const TrackSaleInput = z
       .describe("Sale amount in the smallest currency unit (e.g. kopecks)"),
     currency: NonEmptyString.default("RUB"),
     eventName: NonEmptyString.describe("Human-readable label, e.g. 'Purchase'"),
-    paymentProcessor: z
-      .enum(["stripe", "shopify", "paddle", "polar", "custom"])
-      .default("custom"),
+    paymentProcessor: z.enum(["stripe", "shopify", "paddle", "polar", "custom"]).default("custom"),
     invoiceId: NonEmptyString.optional(),
     leadEventName: NonEmptyString.optional(),
     metadata: z.record(z.string(), z.unknown()).optional(),

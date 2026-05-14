@@ -6,11 +6,7 @@ export const DEFAULT_HTTP_PORT = 8787;
 
 const envSchema = z.object({
   REVROUTE_API_KEY: z.string().trim().min(1).optional(),
-  REVROUTE_API_BASE_URL: z
-    .string()
-    .trim()
-    .url()
-    .default(DEFAULT_BASE_URL),
+  REVROUTE_API_BASE_URL: z.string().trim().url().default(DEFAULT_BASE_URL),
   REVROUTE_ENABLE_PARTNERS: z
     .union([z.literal("0"), z.literal("1"), z.literal("true"), z.literal("false")])
     .default("0"),

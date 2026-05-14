@@ -1,17 +1,17 @@
 import { z } from "zod";
-import { jsonContent, ToolRegistry } from "./_register.js";
-import { registerLinkTools } from "./links.js";
+import { ToolRegistry, jsonContent } from "./_register.js";
 import { registerAnalyticsTools } from "./analytics.js";
-import { registerDomainTools } from "./domains.js";
-import { registerTagTools } from "./tags.js";
-import { registerFolderTools } from "./folders.js";
 import { registerCustomerTools } from "./customers.js";
+import { registerDomainTools } from "./domains.js";
 import { registerEventTools } from "./events.js";
+import { registerFolderTools } from "./folders.js";
+import { registerLinkTools } from "./links.js";
 import { registerMetatagsTools } from "./metatags.js";
-import { registerQrTools } from "./qr.js";
-import { registerWorkspaceTools } from "./workspaces.js";
-import { registerTrackTools } from "./track.js";
 import { registerPartnerTools } from "./partners.js";
+import { registerQrTools } from "./qr.js";
+import { registerTagTools } from "./tags.js";
+import { registerTrackTools } from "./track.js";
+import { registerWorkspaceTools } from "./workspaces.js";
 
 export interface RegisterAllOptions {
   enablePartners?: boolean;

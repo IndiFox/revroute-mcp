@@ -1,10 +1,14 @@
-import { createServer as createHttpServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { randomUUID } from "node:crypto";
+import {
+  type IncomingMessage,
+  type ServerResponse,
+  createServer as createHttpServer,
+} from "node:http";
 
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 
-import { createServer as createMcpServer } from "../server.js";
 import type { ResolvedConfig } from "../config.js";
+import { createServer as createMcpServer } from "../server.js";
 
 interface SessionEntry {
   transport: StreamableHTTPServerTransport;
@@ -60,10 +64,7 @@ async function handleRequest(
   } else if (config.http.corsOrigin === "*") {
     res.setHeader("Access-Control-Allow-Origin", "*");
   }
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization, mcp-session-id",
-  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, mcp-session-id");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
   res.setHeader("Access-Control-Expose-Headers", "mcp-session-id");
 
@@ -141,7 +142,10 @@ function extractBearer(value: string | string[] | undefined): string | undefined
 
 function isOriginAllowed(origin: string, allowed: string): boolean {
   if (allowed === "*") return true;
-  return allowed.split(",").map((s) => s.trim()).includes(origin);
+  return allowed
+    .split(",")
+    .map((s) => s.trim())
+    .includes(origin);
 }
 
 function writeError(res: ServerResponse, status: number, message: string): void {

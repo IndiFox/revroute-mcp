@@ -6,7 +6,7 @@ import {
   DomainUpdateInput,
 } from "../schemas/domain.js";
 import type { Domain } from "../types/revroute.js";
-import { jsonContent, type ToolRegistry } from "./_register.js";
+import { type ToolRegistry, jsonContent } from "./_register.js";
 
 export function registerDomainTools(reg: ToolRegistry): void {
   reg.define({

@@ -128,7 +128,11 @@ export const PayoutListInput = PaginationInput.extend({
 export const PayoutCreateInput = z
   .object({
     partnerId: NonEmptyString,
-    amount: z.number().int().min(1).describe("Amount in the smallest currency unit (cents/kopecks)"),
+    amount: z
+      .number()
+      .int()
+      .min(1)
+      .describe("Amount in the smallest currency unit (cents/kopecks)"),
     currency: NonEmptyString.default("USD"),
     description: z.string().optional(),
     invoiceId: NonEmptyString.optional(),

@@ -1,5 +1,5 @@
+import { type Logger, scrubHeaders, truncate } from "../util/logger.js";
 import { RevrouteApiError, type RevrouteErrorBody } from "./errors.js";
-import { scrubHeaders, truncate, type Logger } from "../util/logger.js";
 
 export interface RevrouteClientOptions {
   apiKey?: string;
@@ -64,11 +64,7 @@ export class RevrouteClient {
     this.logger = opts.logger;
   }
 
-  async request<T = unknown>(
-    method: string,
-    path: string,
-    opts: RequestOptions = {},
-  ): Promise<T> {
+  async request<T = unknown>(method: string, path: string, opts: RequestOptions = {}): Promise<T> {
     const apiKey = opts.apiKey ?? this.apiKey;
     if (!apiKey) {
       throw new RevrouteApiError({

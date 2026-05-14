@@ -11,9 +11,12 @@ import {
   LinkUpsert,
 } from "../schemas/link.js";
 import type { Link } from "../types/revroute.js";
-import { jsonContent, type ToolRegistry } from "./_register.js";
+import { type ToolRegistry, jsonContent } from "./_register.js";
 
-function linkPath(id: string | undefined, externalId: string | undefined): {
+function linkPath(
+  id: string | undefined,
+  externalId: string | undefined,
+): {
   path: string;
   extra?: Record<string, string>;
 } {
@@ -56,16 +59,22 @@ export function registerLinkTools(reg: ToolRegistry): void {
       });
       return jsonContent({
         data,
-        pagination: { page: args.page, pageSize: args.pageSize, hasMore: data.length === args.pageSize },
-        _hint: data.length === args.pageSize ? `Call again with page=${args.page + 1} for more.` : undefined,
+        pagination: {
+          page: args.page,
+          pageSize: args.pageSize,
+          hasMore: data.length === args.pageSize,
+        },
+        _hint:
+          data.length === args.pageSize
+            ? `Call again with page=${args.page + 1} for more.`
+            : undefined,
       });
     },
   });
 
   reg.define({
     name: "revroute_link_get",
-    description:
-      "Retrieve a single short link. Identify it by id, externalId, or domain+key.",
+    description: "Retrieve a single short link. Identify it by id, externalId, or domain+key.",
     inputSchema: LinkIdInput,
     handler: async (args, ctx) => {
       if (args.id) {
@@ -112,7 +121,7 @@ export function registerLinkTools(reg: ToolRegistry): void {
       if (id) {
         path = `/links/${encodeURIComponent(id)}`;
       } else {
-        path = `/links/info`;
+        path = "/links/info";
       }
       const data = await ctx.client.delete<{ id: string }>(path, {
         apiKey: ctx.apiKey,
@@ -147,8 +156,7 @@ export function registerLinkTools(reg: ToolRegistry): void {
 
   reg.define({
     name: "revroute_link_bulk_delete",
-    description:
-      "Permanently delete up to 100 short links by ID. No undo. Requires confirm: true.",
+    description: "Permanently delete up to 100 short links by ID. No undo. Requires confirm: true.",
     inputSchema: LinkBulkDeleteInput,
     destructive: true,
     handler: async (args, ctx) => {
@@ -162,7 +170,8 @@ export function registerLinkTools(reg: ToolRegistry): void {
 
   reg.define({
     name: "revroute_link_count",
-    description: "Count short links matching the given filters. Optionally group by domain/tag/user.",
+    description:
+      "Count short links matching the given filters. Optionally group by domain/tag/user.",
     inputSchema: LinkCountInput,
     handler: async (args, ctx) => {
       const data = await ctx.client.get<number | Record<string, number>>("/links/count", {

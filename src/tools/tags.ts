@@ -1,11 +1,6 @@
-import {
-  TagCreateInput,
-  TagDeleteInput,
-  TagListInput,
-  TagUpdateInput,
-} from "../schemas/tag.js";
+import { TagCreateInput, TagDeleteInput, TagListInput, TagUpdateInput } from "../schemas/tag.js";
 import type { Tag } from "../types/revroute.js";
-import { jsonContent, type ToolRegistry } from "./_register.js";
+import { type ToolRegistry, jsonContent } from "./_register.js";
 
 export function registerTagTools(reg: ToolRegistry): void {
   reg.define({
@@ -36,11 +31,9 @@ export function registerTagTools(reg: ToolRegistry): void {
     description: "Rename or recolor a tag.",
     inputSchema: TagUpdateInput,
     handler: async (args, ctx) => {
-      const data = await ctx.client.patch<Tag>(
-        `/tags/${encodeURIComponent(args.id)}`,
-        args.data,
-        { apiKey: ctx.apiKey },
-      );
+      const data = await ctx.client.patch<Tag>(`/tags/${encodeURIComponent(args.id)}`, args.data, {
+        apiKey: ctx.apiKey,
+      });
       return jsonContent(data);
     },
   });
@@ -51,10 +44,9 @@ export function registerTagTools(reg: ToolRegistry): void {
     inputSchema: TagDeleteInput,
     destructive: true,
     handler: async (args, ctx) => {
-      const data = await ctx.client.delete<{ id: string }>(
-        `/tags/${encodeURIComponent(args.id)}`,
-        { apiKey: ctx.apiKey },
-      );
+      const data = await ctx.client.delete<{ id: string }>(`/tags/${encodeURIComponent(args.id)}`, {
+        apiKey: ctx.apiKey,
+      });
       return jsonContent(data);
     },
   });

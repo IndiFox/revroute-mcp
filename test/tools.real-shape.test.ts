@@ -1,13 +1,13 @@
-import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
+import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 
+import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { RevrouteClient } from "../src/client/http.js";
 import { ToolRegistry } from "../src/tools/_register.js";
 import { registerLinkTools } from "../src/tools/links.js";
 import { registerWorkspaceTools } from "../src/tools/workspaces.js";
 import { createLogger } from "../src/util/logger.js";
-import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 
 const BASE_URL = "https://app.revroute.test/api";
 const server = setupServer();

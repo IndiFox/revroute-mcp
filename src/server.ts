@@ -1,9 +1,9 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 
 import { RevrouteClient } from "./client/http.js";
-import { buildRegistry } from "./tools/index.js";
 import type { ResolvedConfig } from "./config.js";
-import { createLogger, type Logger } from "./util/logger.js";
+import { buildRegistry } from "./tools/index.js";
+import { type Logger, createLogger } from "./util/logger.js";
 
 export const SERVER_INFO = {
   name: "revroute-mcp",
@@ -20,7 +20,10 @@ export interface CreatedServer {
 // caller-supplied API key into tool handlers. Stdio leaves it undefined.
 export type ApiKeyResolver = () => string | undefined;
 
-export function createServer(config: ResolvedConfig, apiKeyResolver?: ApiKeyResolver): CreatedServer {
+export function createServer(
+  config: ResolvedConfig,
+  apiKeyResolver?: ApiKeyResolver,
+): CreatedServer {
   const logger = createLogger({ debug: config.debug });
   const client = new RevrouteClient({
     apiKey: config.apiKey,
