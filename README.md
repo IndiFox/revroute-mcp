@@ -1,5 +1,7 @@
 # revroute-mcp
 
+**English** · [Русский](README.ru.md)
+
 [![npm](https://img.shields.io/npm/v/revroute-mcp.svg)](https://www.npmjs.com/package/revroute-mcp)
 [![CI](https://github.com/IndiFox/revroute-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/IndiFox/revroute-mcp/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
