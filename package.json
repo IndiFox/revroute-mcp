@@ -41,7 +41,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/IndiFox/revroute-mcp.git"
+    "url": "git+https://github.com/IndiFox/revroute-mcp.git"
   },
   "homepage": "https://github.com/IndiFox/revroute-mcp#readme",
   "bugs": {
