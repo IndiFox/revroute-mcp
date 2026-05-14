@@ -10,6 +10,19 @@ export interface PaginationMeta {
   total?: number;
 }
 
+// Shape verified against a live response from app.revroute.ru/api/links on 2026-05-14.
+// Differs from dub.co in several places (utm_* are flat, tags is an array of objects, etc.).
+export interface LinkTag {
+  id: string;
+  name: string;
+  color?: string;
+}
+
+export interface LinkTestVariant {
+  url: string;
+  percentage: number;
+}
+
 export interface Link {
   id: string;
   domain: string;
@@ -18,32 +31,54 @@ export interface Link {
   shortLink: string;
   archived: boolean;
   expiresAt: string | null;
+  expiredUrl: string | null;
+  disabledAt: string | null;
   password: string | null;
+  trackConversion: boolean;
   proxy: boolean;
   title: string | null;
   description: string | null;
   image: string | null;
+  video: string | null;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  utm_term: string | null;
+  utm_content: string | null;
   rewrite: boolean;
+  linkRetentionCleanupDisabledAt: string | null;
+  doIndex: boolean;
   ios: string | null;
   android: string | null;
   geo: Record<string, string> | null;
-  publicStats: boolean;
-  tagId: string | null;
-  tagIds: string[];
-  comments: string | null;
-  qrCode: string | null;
-  workspaceId: string;
+  testVariants: LinkTestVariant[] | null;
+  testStartedAt: string | null;
+  testCompletedAt: string | null;
+  userId: string;
+  projectId: string;
   folderId: string | null;
   externalId: string | null;
   tenantId: string | null;
+  publicStats: boolean;
   clicks: number;
-  lastClicked: string | null;
   leads: number;
+  conversions: number;
   sales: number;
   saleAmount: number;
+  lastClicked: string | null;
   createdAt: string;
   updatedAt: string;
-  projectId: string;
+  comments: string | null;
+  programId: string | null;
+  partnerId: string | null;
+  tags: LinkTag[];
+  identifier: string | null;
+  // Legacy: revroute still returns a singular `tagId` and a parallel `tagIds`-style flat array
+  // is NOT present in their response. Keep `tagId` for backward compat with old dub clients.
+  tagId: string | null;
+  webhookIds: string[];
+  qrCode: string | null;
+  workspaceId: string;
 }
 
 export interface Domain {
