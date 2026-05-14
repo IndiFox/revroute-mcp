@@ -1,27 +1,12 @@
-<p align="center">
-  <a href="https://revroute.ru">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="assets/wordmark-dark.svg">
-      <img src="assets/wordmark-light.svg" alt="revroute" height="56">
-    </picture>
-  </a>
-</p>
+# revroute-mcp
 
-<h1 align="center">revroute-mcp</h1>
+[![npm](https://img.shields.io/npm/v/revroute-mcp.svg)](https://www.npmjs.com/package/revroute-mcp)
+[![CI](https://github.com/IndiFox/revroute-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/IndiFox/revroute-mcp/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-<p align="center">
-  <strong>The official Model Context Protocol (MCP) server for <a href="https://revroute.ru">revroute.ru</a>.</strong>
-  <br/>
-  Give any LLM full control over your short links, analytics, custom domains, and affiliate / referral program.
-</p>
-
-<p align="center">
-  <a href="https://www.npmjs.com/package/revroute-mcp"><img src="https://img.shields.io/npm/v/revroute-mcp.svg" alt="npm"></a>
-  <a href="https://github.com/IndiFox/revroute-mcp/actions/workflows/ci.yml"><img src="https://github.com/IndiFox/revroute-mcp/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
-</p>
-
----
+The official Model Context Protocol (MCP) server for **[revroute.ru](https://revroute.ru)** —
+give any LLM full control over your short links, analytics, custom domains, customers, and
+affiliate / referral program.
 
 ## What you can do with it
 
