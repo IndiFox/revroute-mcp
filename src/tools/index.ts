@@ -1,0 +1,58 @@
+import { z } from "zod";
+import { jsonContent, ToolRegistry } from "./_register.js";
+import { registerLinkTools } from "./links.js";
+import { registerAnalyticsTools } from "./analytics.js";
+import { registerDomainTools } from "./domains.js";
+import { registerTagTools } from "./tags.js";
+import { registerFolderTools } from "./folders.js";
+import { registerCustomerTools } from "./customers.js";
+import { registerEventTools } from "./events.js";
+import { registerMetatagsTools } from "./metatags.js";
+import { registerQrTools } from "./qr.js";
+import { registerWorkspaceTools } from "./workspaces.js";
+import { registerTrackTools } from "./track.js";
+import { registerPartnerTools } from "./partners.js";
+
+export interface RegisterAllOptions {
+  enablePartners?: boolean;
+}
+
+export function buildRegistry(opts: RegisterAllOptions = {}): ToolRegistry {
+  const reg = new ToolRegistry();
+
+  // Always-on debug tool. Useful for testing the connection without an API key.
+  reg.define({
+    name: "revroute_ping",
+    description:
+      "Health-check tool. Returns the server version, configured base URL, and whether an API key is present. Does not call the upstream API.",
+    inputSchema: z.object({}).strict(),
+    handler: async (_args, ctx) => {
+      return jsonContent({
+        ok: true,
+        server: "revroute-mcp",
+        baseUrl: ctx.client.baseUrl ?? "(unknown)",
+        apiKey: ctx.apiKey ? "configured" : "missing",
+      });
+    },
+  });
+
+  registerLinkTools(reg);
+  registerAnalyticsTools(reg);
+  registerDomainTools(reg);
+  registerTagTools(reg);
+  registerFolderTools(reg);
+  registerCustomerTools(reg);
+  registerEventTools(reg);
+  registerMetatagsTools(reg);
+  registerQrTools(reg);
+  registerWorkspaceTools(reg);
+  registerTrackTools(reg);
+
+  if (opts.enablePartners) {
+    registerPartnerTools(reg);
+  }
+
+  return reg;
+}
+
+export { ToolRegistry } from "./_register.js";

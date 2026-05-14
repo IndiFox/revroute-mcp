@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "revroute": {
+      "command": "npx",
+      "args": ["-y", "revroute-mcp"],
+      "env": {
+        "REVROUTE_API_KEY": "dub_xxx_replace_me"
+      }
+    }
+  }
+}

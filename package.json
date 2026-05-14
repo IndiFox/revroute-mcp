@@ -1,0 +1,68 @@
+{
+  "name": "revroute-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for revroute.ru — short links, analytics, domains, tags, and conversion tracking. Compatible with the dub.co API surface.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "revroute-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "examples"
+  ],
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsup",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm build && pnpm test"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "revroute",
+    "dub",
+    "short-links",
+    "url-shortener",
+    "analytics",
+    "anthropic",
+    "claude"
+  ],
+  "author": "RevRoute",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IndiFox/revroute-mcp.git"
+  },
+  "homepage": "https://github.com/IndiFox/revroute-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/IndiFox/revroute-mcp/issues"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "commander": "^12.1.0",
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.23.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^20.14.10",
+    "msw": "^2.6.4",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.5"
+  }
+}
