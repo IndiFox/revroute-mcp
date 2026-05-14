@@ -151,9 +151,17 @@ servers are connected at once. Tools marked **destructive** require an explicit
 
 ### Partner program (opt-in via `REVROUTE_ENABLE_PARTNERS=1`)
 
-Programs, Partners, Commissions, Bounties, Payouts. 12 additional tools that handle the
-affiliate / referral side of revroute. Hidden by default to keep `tools/list` lean for users
-who don't run a partner program.
+10 additional tools for the affiliate / referral side of revroute. Hidden by default to keep
+`tools/list` lean for workspaces that don't run a partner program.
+
+- `revroute_partner_create`, `_list`, `_get`, `_update` — manage partners (4)
+- `revroute_commission_list`, `_update` — track and adjust commissions (2)
+- `revroute_bounty_list`, `_bounty_create` — one-off rewards (2)
+- `revroute_payout_list`, `_payout_create` — payouts (**`_create` is destructive — billable**)
+
+revroute exposes these endpoints flat (no `/programs/{id}/…` prefix). Each workspace has a
+single implicit program; `programId` is a field on partner records but there is no public
+list-programs API.
 
 ## Manual smoke test (post-install)
 

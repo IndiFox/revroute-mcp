@@ -17,14 +17,18 @@ describe("buildRegistry", () => {
     const names = reg.list().map((t) => t.name);
     expect(names).toContain("revroute_partner_create");
     expect(names).toContain("revroute_payout_create");
-    expect(names).toContain("revroute_program_list");
+    expect(names).toContain("revroute_commission_list");
+    expect(names).toContain("revroute_bounty_list");
+    // revroute has no list-programs API; we don't expose those tools either.
+    expect(names).not.toContain("revroute_program_list");
+    expect(names).not.toContain("revroute_program_get");
   });
 
-  it("counts roughly 35 core tools and ~12 partner tools", () => {
+  it("counts core ~36 and partner ~10 tools", () => {
     const core = buildRegistry({}).list().length;
     const all = buildRegistry({ enablePartners: true }).list().length;
     expect(core).toBeGreaterThanOrEqual(30);
-    expect(all - core).toBeGreaterThanOrEqual(10);
+    expect(all - core).toBeGreaterThanOrEqual(9);
   });
 
   it("marks destructive tools with [DESTRUCTIVE] prefix in description (when rendered via bind)", () => {

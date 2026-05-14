@@ -216,59 +216,149 @@ export interface AnalyticsGeneric {
   saleAmount?: number;
 }
 
-// Partner-program types (only exposed when REVROUTE_ENABLE_PARTNERS=1).
-export interface Program {
+// Partner-program types — only exposed when REVROUTE_ENABLE_PARTNERS=1.
+// Shapes verified against a live revroute response on 2026-05-15.
+// revroute does NOT expose a list-programs API; programs are workspace-implicit and
+// only surface as a `programId` field on partner records.
+
+export interface PartnerLink {
   id: string;
-  name: string;
-  slug: string;
-  logo: string | null;
-  cookieLength: number;
-  domain: string | null;
-  createdAt: string;
+  domain: string;
+  key: string;
+  shortLink: string;
+  url?: string;
+  clicks?: number;
+  leads?: number;
+  conversions?: number;
+  sales?: number;
+  saleAmount?: number;
 }
 
 export interface Partner {
   id: string;
   name: string;
+  companyName: string | null;
   email: string;
   image: string | null;
+  description: string | null;
   country: string | null;
-  status: "approved" | "invited" | "rejected" | "banned" | "pending";
+  paypalEmail: string | null;
+  stripeConnectId: string | null;
+  payoutsEnabledAt: string | null;
+  trustedAt: string | null;
   programId: string;
+  groupId: string | null;
+  partnerId: string;
+  tenantId: string | null;
   createdAt: string;
+  status: "approved" | "invited" | "rejected" | "banned" | "pending" | "archived";
+  links: PartnerLink[];
+  totalCommissions: number;
+  clickRewardId: string | null;
+  leadRewardId: string | null;
+  saleRewardId: string | null;
+  discountId: string | null;
+  applicationId: string | null;
+  bannedAt: string | null;
+  bannedReason: string | null;
+  // Aggregate analytics
+  totalClicks: number;
+  totalLeads: number;
+  totalConversions: number;
+  totalSales: number;
+  totalSaleAmount: number;
+  netRevenue: number;
+  earningsPerClick: number;
+  averageLifetimeValue: number;
+  clickToLeadRate: number | null;
+  clickToConversionRate: number | null;
+  leadToConversionRate: number | null;
+  returnOnAdSpend: number | null;
+  // Social profile
+  website: string | null;
+  youtube: string | null;
+  twitter: string | null;
+  linkedin: string | null;
+  instagram: string | null;
+  tiktok: string | null;
+  // Per-period
+  clicks: number;
+  leads: number;
+  conversions: number;
+  sales: number;
+  saleAmount: number;
+}
+
+export interface CommissionPartnerRef {
+  id: string;
+  name: string;
+  email: string;
+  image: string | null;
+  payoutsEnabledAt: string | null;
+  country: string | null;
+  groupId: string | null;
+}
+
+export interface CommissionCustomerRef {
+  id: string;
+  name: string | null;
+  email: string | null;
+  avatar: string | null;
+  country?: string | null;
+  externalId?: string | null;
+  stripeCustomerId?: string | null;
 }
 
 export interface Commission {
   id: string;
-  partnerId: string;
-  programId: string;
-  customerId: string | null;
-  type: "click" | "lead" | "sale";
+  type: "click" | "lead" | "sale" | "custom";
   amount: number;
   earnings: number;
   currency: string;
-  status: "pending" | "processed" | "paid" | "duplicate" | "fraud" | "canceled";
+  status: "pending" | "processed" | "paid" | "duplicate" | "fraud" | "canceled" | "refunded";
+  invoiceId: string | null;
+  description: string | null;
+  quantity: number | null;
+  userId: string | null;
   createdAt: string;
+  updatedAt: string;
+  partner: CommissionPartnerRef | null;
+  customer: CommissionCustomerRef | null;
 }
 
 export interface Payout {
   id: string;
-  partnerId: string;
-  programId: string;
+  invoiceId: string | null;
   amount: number;
   currency: string;
   status: "created" | "pending" | "completed" | "failed" | "canceled";
-  paidAt: string | null;
+  description: string | null;
+  periodStart: string | null;
+  periodEnd: string | null;
   createdAt: string;
+  initiatedAt: string | null;
+  paidAt: string | null;
+  failureReason: string | null;
+  mode: "internal" | "stripe" | "manual" | string;
+  method: string | null;
+  traceId: string | null;
+  partner: CommissionPartnerRef | null;
+  user: { id: string; name?: string; email?: string } | null;
 }
 
 export interface Bounty {
   id: string;
-  programId: string;
-  partnerId: string | null;
+  name: string;
+  description: string | null;
   type: "submission" | "performance";
-  status: "pending" | "approved" | "rejected";
+  startsAt: string;
+  endsAt: string | null;
+  submissionsOpenAt: string | null;
   rewardAmount: number;
-  description: string;
-  createdAt: string;
+  rewardDescription: string | null;
+  performanceCondition: string | null;
+  performanceScope: "new" | "all" | null;
+  submissionRequirements: string | null;
+  socialMetricsLastSyncedAt: string | null;
+  groups: Array<{ id: string; name?: string }>;
 }
