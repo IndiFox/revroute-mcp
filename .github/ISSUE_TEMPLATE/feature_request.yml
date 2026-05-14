@@ -1,0 +1,31 @@
+name: Feature request
+description: Suggest a new tool, capability, or improvement
+labels: ["enhancement", "triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: What can't you do today, or what is awkward?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: A new tool name + signature, a new env variable, a new option on an existing tool — be as concrete as you can.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Workarounds, other tools, related MCPs, etc.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Links to revroute docs, related GitHub issues, screenshots.

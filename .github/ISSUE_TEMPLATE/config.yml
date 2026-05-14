@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: revroute.ru support
+    url: https://revroute.ru/
+    about: Questions about the revroute service itself (account, billing, API access) — not the MCP server.
+  - name: Security vulnerability
+    url: https://github.com/IndiFox/revroute-mcp/security/advisories/new
+    about: Report security issues privately (do not open a public issue).

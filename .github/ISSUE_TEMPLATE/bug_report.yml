@@ -1,0 +1,85 @@
+name: Bug report
+description: Something broken or behaving unexpectedly
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug! Please fill in as much as you can — the more we have up
+        front, the faster we can reproduce.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+      placeholder: I called `revroute_link_list` and got…
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Tool name, arguments, and any preceding context. Redact your API key.
+      placeholder: |
+        1. Set REVROUTE_API_KEY=…
+        2. Call revroute_link_list with `{ "page": 1 }`
+        3. Got error: `…`
+      render: markdown
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: revroute-mcp version
+      placeholder: 0.1.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: transport
+    attributes:
+      label: Transport
+      options:
+        - stdio
+        - Streamable HTTP
+        - both / unsure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: client
+    attributes:
+      label: MCP client
+      options:
+        - Claude Desktop
+        - Claude Code
+        - Cursor
+        - MCP Inspector
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: input
+    id: node
+    attributes:
+      label: Node version
+      placeholder: v20.18.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / error output
+      description: Run with `REVROUTE_DEBUG=1` for verbose stderr. Redact secrets.
+      render: shell
