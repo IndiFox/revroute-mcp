@@ -62,7 +62,7 @@ Claude: [calls revroute_link_create] → https://rev.ru/abc123
 | Variable                    | Required | Default                   | Description                                                |
 | --------------------------- | -------- | ------------------------- | ---------------------------------------------------------- |
 | `REVROUTE_API_KEY`          | yes¹     | —                         | Workspace API key. ¹Not needed if running HTTP transport.  |
-| `REVROUTE_API_BASE_URL`     | no       | `https://api.revroute.ru` | Override for staging / on-premise.                         |
+| `REVROUTE_API_BASE_URL`     | no       | `https://app.revroute.ru/api` | Override for staging / on-premise.                         |
 | `REVROUTE_ENABLE_PARTNERS`  | no       | `0`                       | Set to `1` to expose partner-program tools.                |
 | `REVROUTE_DEBUG`            | no       | `0`                       | Verbose request tracing to stderr (headers masked).        |
 | `REVROUTE_HTTP_HOST`        | no       | `127.0.0.1`               | HTTP transport bind host.                                  |

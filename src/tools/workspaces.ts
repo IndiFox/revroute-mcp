@@ -6,10 +6,10 @@ export function registerWorkspaceTools(reg: ToolRegistry): void {
   reg.define({
     name: "revroute_workspace_get",
     description:
-      "Retrieve information about the current workspace (determined by the API key): plan, usage, limits.",
+      "List workspaces the API key has access to (plan, usage, limits). The API key authenticates a single workspace in most cases, so the array typically has one element.",
     inputSchema: WorkspaceGetInput,
     handler: async (_args, ctx) => {
-      const data = await ctx.client.get<Workspace>("/workspaces/current", { apiKey: ctx.apiKey });
+      const data = await ctx.client.get<Workspace[]>("/workspaces", { apiKey: ctx.apiKey });
       return jsonContent(data);
     },
   });

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const DEFAULT_BASE_URL = "https://api.revroute.ru";
+export const DEFAULT_BASE_URL = "https://app.revroute.ru/api";
 export const DEFAULT_HTTP_HOST = "127.0.0.1";
 export const DEFAULT_HTTP_PORT = 8787;
 
