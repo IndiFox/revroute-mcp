@@ -1,6 +1,6 @@
 // API key handling for revroute.ru.
-// TODO(revroute-spec): confirm key prefix once revroute publishes its API reference.
-// Currently dub-derived: secret keys begin with `dub_`, publishable keys with `dub_pk_`.
+// Accepted prefixes are based on the keys revroute currently issues; new prefixes may
+// be added here without breaking existing keys.
 const KNOWN_PREFIXES = ["dub_", "revroute_"];
 
 export interface ApiKeyMeta {

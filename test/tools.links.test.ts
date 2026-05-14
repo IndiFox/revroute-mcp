@@ -15,7 +15,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 function setup() {
-  const client = new RevrouteClient({ apiKey: "dub_test_1234", baseUrl: BASE_URL });
+  const client = new RevrouteClient({ apiKey: "revroute_test_1234", baseUrl: BASE_URL });
   const reg = new ToolRegistry();
   registerLinkTools(reg);
   return { client, reg };

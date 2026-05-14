@@ -4,7 +4,7 @@
       "command": "npx",
       "args": ["-y", "revroute-mcp"],
       "env": {
-        "REVROUTE_API_KEY": "dub_xxx_replace_me",
+        "REVROUTE_API_KEY": "<your-revroute-api-key>",
         "REVROUTE_API_BASE_URL": "https://app.revroute.ru/api"
       }
     }

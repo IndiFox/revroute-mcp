@@ -3,7 +3,7 @@ import { NonEmptyString } from "./common.js";
 
 export const TrackLeadInput = z
   .object({
-    clickId: NonEmptyString.describe("dub_id cookie value from the visitor"),
+    clickId: NonEmptyString.describe("Click ID cookie value from the visitor's browser"),
     eventName: NonEmptyString.describe("Human-readable label, e.g. 'Signup completed'"),
     eventQuantity: z.number().int().min(1).optional(),
     externalId: NonEmptyString.describe("Stable customer identifier from your system"),

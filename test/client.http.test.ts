@@ -14,7 +14,7 @@ afterAll(() => server.close());
 
 function makeClient(overrides: Partial<ConstructorParameters<typeof RevrouteClient>[0]> = {}) {
   return new RevrouteClient({
-    apiKey: "dub_test_secret_1234",
+    apiKey: "revroute_test_secret_1234",
     baseUrl: BASE_URL,
     maxRetries: 2,
     ...overrides,
@@ -34,7 +34,7 @@ describe("RevrouteClient", () => {
     const client = makeClient();
     const result = await client.get<{ id: string }>("/links/abc");
     expect(result.id).toBe("abc");
-    expect(seenAuth).toBe("Bearer dub_test_secret_1234");
+    expect(seenAuth).toBe("Bearer revroute_test_secret_1234");
   });
 
   it("retries on 429 honoring Retry-After (seconds)", async () => {

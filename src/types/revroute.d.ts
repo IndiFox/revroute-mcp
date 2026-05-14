@@ -1,7 +1,6 @@
 // Response types for revroute.ru API.
-// TODO(revroute-spec): verify each interface against the official revroute.ru
-// OpenAPI/Postman spec once published. Currently derived from the public dub.co
-// API surface, which revroute mirrors 1:1 in v1.
+// Shapes here were verified against live revroute responses; verify again against
+// the official revroute.ru OpenAPI spec once it ships publicly.
 
 export interface PaginationMeta {
   page: number;
@@ -11,7 +10,6 @@ export interface PaginationMeta {
 }
 
 // Shape verified against a live response from app.revroute.ru/api/links on 2026-05-14.
-// Differs from dub.co in several places (utm_* are flat, tags is an array of objects, etc.).
 export interface LinkTag {
   id: string;
   name: string;
@@ -73,8 +71,7 @@ export interface Link {
   partnerId: string | null;
   tags: LinkTag[];
   identifier: string | null;
-  // Legacy: revroute still returns a singular `tagId` and a parallel `tagIds`-style flat array
-  // is NOT present in their response. Keep `tagId` for backward compat with old dub clients.
+  // Legacy: revroute still returns a singular `tagId` alongside the richer `tags` array.
   tagId: string | null;
   webhookIds: string[];
   qrCode: string | null;

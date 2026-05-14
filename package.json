@@ -1,7 +1,7 @@
 {
   "name": "revroute-mcp",
   "version": "0.1.0",
-  "description": "MCP server for revroute.ru — short links, analytics, domains, tags, and conversion tracking. Compatible with the dub.co API surface.",
+  "description": "MCP server for revroute.ru — short links, analytics, domains, tags, customers, and conversion tracking.",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,9 +30,9 @@
     "mcp",
     "model-context-protocol",
     "revroute",
-    "dub",
     "short-links",
     "url-shortener",
+    "link-shortener",
     "analytics",
     "anthropic",
     "claude"

@@ -5,8 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Model Context Protocol (MCP) server for **[revroute.ru](https://revroute.ru)** — short links,
-analytics, custom domains, tags, customers, and conversion tracking. Compatible with the dub.co
-API surface; revroute is the Russian-hosted equivalent.
+analytics, custom domains, tags, customers, and conversion tracking.
 
 Drop it into Claude Desktop, Claude Code, Cursor, or any MCP-aware client, and your model can
 create short links, read analytics, manage domains, and trigger conversion events on your behalf.
@@ -19,8 +18,6 @@ create short links, read analytics, manage domains, and trigger conversion event
 ### 1. Get an API key
 
 Sign in to revroute.ru → workspace settings → API keys → create a key with the scopes you need.
-The key looks like `dub_xxxxxxxxxxxx` (legacy prefix inherited from the underlying dub.co
-codebase; revroute may migrate to `revroute_` prefix in the future — both are accepted).
 
 ### 2. Wire it up
 
@@ -33,7 +30,7 @@ codebase; revroute may migrate to `revroute_` prefix in the future — both are 
     "revroute": {
       "command": "npx",
       "args": ["-y", "revroute-mcp"],
-      "env": { "REVROUTE_API_KEY": "dub_xxxxx" }
+      "env": { "REVROUTE_API_KEY": "<your-revroute-api-key>" }
     }
   }
 }
@@ -42,7 +39,7 @@ codebase; revroute may migrate to `revroute_` prefix in the future — both are 
 **Claude Code:**
 
 ```bash
-claude mcp add revroute --env REVROUTE_API_KEY=dub_xxxxx -- npx -y revroute-mcp
+claude mcp add revroute --env REVROUTE_API_KEY=<your-revroute-api-key> -- npx -y revroute-mcp
 ```
 
 **Cursor:** same JSON as Claude Desktop, in `.cursor/mcp.json` (project) or `~/.cursor/mcp.json`
@@ -59,15 +56,15 @@ Claude: [calls revroute_link_create] → https://rev.ru/abc123
 
 ## Environment
 
-| Variable                    | Required | Default                   | Description                                                |
-| --------------------------- | -------- | ------------------------- | ---------------------------------------------------------- |
-| `REVROUTE_API_KEY`          | yes¹     | —                         | Workspace API key. ¹Not needed if running HTTP transport.  |
+| Variable                    | Required | Default                       | Description                                                |
+| --------------------------- | -------- | ----------------------------- | ---------------------------------------------------------- |
+| `REVROUTE_API_KEY`          | yes¹     | —                             | Workspace API key. ¹Not needed if running HTTP transport.  |
 | `REVROUTE_API_BASE_URL`     | no       | `https://app.revroute.ru/api` | Override for staging / on-premise.                         |
-| `REVROUTE_ENABLE_PARTNERS`  | no       | `0`                       | Set to `1` to expose partner-program tools.                |
-| `REVROUTE_DEBUG`            | no       | `0`                       | Verbose request tracing to stderr (headers masked).        |
-| `REVROUTE_HTTP_HOST`        | no       | `127.0.0.1`               | HTTP transport bind host.                                  |
-| `REVROUTE_HTTP_PORT`        | no       | `8787`                    | HTTP transport port.                                       |
-| `REVROUTE_CORS_ORIGIN`      | no       | `*`                       | Comma-separated origin allowlist for the HTTP transport.   |
+| `REVROUTE_ENABLE_PARTNERS`  | no       | `0`                           | Set to `1` to expose partner-program tools.                |
+| `REVROUTE_DEBUG`            | no       | `0`                           | Verbose request tracing to stderr (headers masked).        |
+| `REVROUTE_HTTP_HOST`        | no       | `127.0.0.1`                   | HTTP transport bind host.                                  |
+| `REVROUTE_HTTP_PORT`        | no       | `8787`                        | HTTP transport port.                                       |
+| `REVROUTE_CORS_ORIGIN`      | no       | `*`                           | Comma-separated origin allowlist for the HTTP transport.   |
 
 ## Transports
 
@@ -159,16 +156,12 @@ servers are connected at once. Tools marked **destructive** require an explicit
 - `revroute_bounty_list`, `_bounty_create` — one-off rewards (2)
 - `revroute_payout_list`, `_payout_create` — payouts (**`_create` is destructive — billable**)
 
-revroute exposes these endpoints flat (no `/programs/{id}/…` prefix). Each workspace has a
-single implicit program; `programId` is a field on partner records but there is no public
-list-programs API.
-
 ## Manual smoke test (post-install)
 
 Run through these six checks once after installing or upgrading:
 
 1. **List tools:** `npx -y @modelcontextprotocol/inspector npx -y revroute-mcp` →
-   `tools/list` returns ~35 tools (or ~47 with partners).
+   `tools/list` returns ~36 tools (or ~46 with partners).
 2. **Create a link:** call `revroute_link_create` with `{ "url": "https://example.com" }` —
    expect a `shortLink` in the response.
 3. **List links:** call `revroute_link_list` — expect your test link in `data`.
@@ -189,16 +182,6 @@ pnpm build
 ```
 
 Tests use [Vitest](https://vitest.dev) and [MSW](https://mswjs.io) to mock the upstream API.
-
-## API compatibility
-
-revroute.ru mirrors the public dub.co API 1:1 by design — endpoints, request shapes, and error
-formats are intended to be drop-in compatible. This MCP server is built against that contract.
-Until revroute publishes its own full OpenAPI spec, internal types are derived from the dub.co
-SDK and flagged `TODO(revroute-spec)` for verification.
-
-This project is **independent**: it is not affiliated with [Dub Inc.](https://dub.co); the dub
-trademark and dub.co API design belong to its respective owners.
 
 ## License
 

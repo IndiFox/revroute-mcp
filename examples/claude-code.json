@@ -1,12 +1,12 @@
 {
-  "$comment": "Add to ~/.claude.json under mcpServers, or run: claude mcp add revroute --env REVROUTE_API_KEY=dub_xxx -- npx -y revroute-mcp",
+  "$comment": "Add to ~/.claude.json under mcpServers, or run: claude mcp add revroute --env REVROUTE_API_KEY=<your-key> -- npx -y revroute-mcp",
   "mcpServers": {
     "revroute": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "revroute-mcp"],
       "env": {
-        "REVROUTE_API_KEY": "dub_xxx_replace_me"
+        "REVROUTE_API_KEY": "<your-revroute-api-key>"
       }
     }
   }

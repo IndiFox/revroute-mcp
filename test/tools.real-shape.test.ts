@@ -74,7 +74,7 @@ const realLink = {
 };
 
 function setup() {
-  const client = new RevrouteClient({ apiKey: "dub_test_1234", baseUrl: BASE_URL });
+  const client = new RevrouteClient({ apiKey: "revroute_test_1234", baseUrl: BASE_URL });
   const reg = new ToolRegistry();
   registerLinkTools(reg);
   registerWorkspaceTools(reg);
@@ -99,7 +99,7 @@ describe("real-shape compatibility", () => {
       }),
     );
     const link = out.data[0];
-    // revroute-specific fields that aren't in stock dub.co
+    // revroute-specific fields verified against a live API response
     expect(link.disabledAt).toBeNull();
     expect(link.video).toBeNull();
     expect(link.utm_source).toBeNull();
