@@ -18,7 +18,7 @@ export interface RequestOptions {
   apiKey?: string;
 }
 
-const DEFAULT_USER_AGENT = "revroute-mcp/0.1.0 (+https://github.com/IndiFox/revroute-mcp)";
+const DEFAULT_USER_AGENT = "revroute-mcp/0.2.0 (+https://github.com/IndiFox/revroute-mcp)";
 const RETRYABLE_STATUS = new Set([429, 500, 502, 503, 504]);
 const MAX_BACKOFF_MS = 10_000;
 

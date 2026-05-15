@@ -42,7 +42,7 @@ AI assistant can manage **every part** of your revroute workspace through natura
 - **stdio** — zero-config for Claude Desktop / Claude Code / Cursor via `npx`
 - **Streamable HTTP** — for remote / hosted MCP scenarios with per-request `Authorization: Bearer` auth
 
-> **Status:** v0.1 (pre-1.0). Breaking changes may land in minor versions until 1.0.0. See
+> **Status:** v0.2 (pre-1.0). Breaking changes may land in minor versions until 1.0.0. See
 > [CHANGELOG.md](CHANGELOG.md).
 
 ## Quickstart
@@ -51,12 +51,31 @@ AI assistant can manage **every part** of your revroute workspace through natura
 
 Sign in to revroute.ru → workspace settings → API keys → create a key with the scopes you need.
 
-### 2. Wire it up
+### 2. Install — pick one
 
-**Claude Desktop** (`~/.config/Claude/claude_desktop_config.json` or
-`%APPDATA%\Claude\claude_desktop_config.json`):
+**Option A · Claude Desktop, one-click (recommended)**
+
+1. Download the latest `revroute-mcp-<version>.dxt` from
+   [GitHub Releases](https://github.com/IndiFox/revroute-mcp/releases/latest).
+2. Drag the file onto the Claude Desktop window — or open Settings → Extensions →
+   *Install Extension* → choose the `.dxt`.
+3. Paste your RevRoute API key in the popup. Set *Enable partner-program tools* to `1`
+   if you run an affiliate / referral program (otherwise leave at `0` — those 10 tools
+   stay hidden and `tools/list` stays lean).
+4. Done. Open a new chat: «show my revroute short links».
+
+**Option B · Claude Code / Cursor / custom MCP clients via `npx`**
+
+```bash
+# Claude Code
+claude mcp add revroute \
+  --env REVROUTE_API_KEY=<your-revroute-api-key> \
+  --env REVROUTE_ENABLE_PARTNERS=1 \
+  -- npx -y revroute-mcp
+```
 
 ```json
+// Cursor: .cursor/mcp.json (project) or ~/.cursor/mcp.json (global)
 {
   "mcpServers": {
     "revroute": {
@@ -71,22 +90,9 @@ Sign in to revroute.ru → workspace settings → API keys → create a key with
 }
 ```
 
-> Set `REVROUTE_ENABLE_PARTNERS=1` only if you actively run a partner / affiliate program —
-> otherwise the 10 partner tools stay hidden and `tools/list` stays lean.
-
-**Claude Code:**
-
-```bash
-claude mcp add revroute \
-  --env REVROUTE_API_KEY=<your-revroute-api-key> \
-  --env REVROUTE_ENABLE_PARTNERS=1 \
-  -- npx -y revroute-mcp
-```
-
-**Cursor:** same JSON as Claude Desktop, in `.cursor/mcp.json` (project) or `~/.cursor/mcp.json`
-(global).
-
-See [`examples/`](examples/) for ready-to-copy snippets.
+See [`examples/`](examples/) for more snippets (Claude Desktop legacy `claude_desktop_config.json`,
+generic). Note: in current Claude Desktop versions the JSON-config path is being deprecated in favour
+of `.dxt` Extensions — prefer Option A on Desktop.
 
 ### 3. Try it
 
