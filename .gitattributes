@@ -1,0 +1,14 @@
+# Force LF line endings for all text files so biome/CI agrees with local Windows checkout.
+* text=auto eol=lf
+
+# Treat package-lock / pnpm-lock as generated (no eol conversion conflicts).
+pnpm-lock.yaml linguist-generated=true
+package-lock.json linguist-generated=true
+
+# Binary files (do not touch).
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary

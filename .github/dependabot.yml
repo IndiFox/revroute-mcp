@@ -13,6 +13,11 @@ updates:
     commit-message:
       prefix: chore
       include: scope
+    # Suppress automatic major bumps — they need code-level migration.
+    # Security updates still come through (automated-security-fixes is enabled at the repo level).
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       typescript-tooling:
         patterns:
