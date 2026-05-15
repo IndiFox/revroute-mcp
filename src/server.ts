@@ -7,7 +7,7 @@ import { createLogger, type Logger } from "./util/logger.js";
 
 export const SERVER_INFO = {
   name: "revroute-mcp",
-  version: "0.2.0",
+  version: "0.2.1",
 };
 
 export interface CreatedServer {

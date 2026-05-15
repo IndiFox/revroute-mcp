@@ -1,8 +1,8 @@
 {
-  "manifest_version": "0.2",
+  "manifest_version": "0.3",
   "name": "revroute-mcp",
   "display_name": "RevRoute",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Manage revroute.ru short links, analytics, custom domains, customers, and affiliate / referral program from Claude.",
   "long_description": "MCP server for revroute.ru. 36 core tools (links, analytics, domains, tags, folders, customers, events, metatags, QR, workspaces, conversion tracking) plus 10 optional partner-program tools (partners, commissions, bounties, payouts) when enabled.",
   "author": {
@@ -52,11 +52,11 @@
       "default": "https://app.revroute.ru/api"
     },
     "enable_partners": {
-      "type": "string",
-      "title": "Enable partner-program tools (0 or 1)",
-      "description": "Set to 1 to expose 10 affiliate/referral tools (partners, commissions, bounties, payouts).",
+      "type": "boolean",
+      "title": "Enable partner-program tools",
+      "description": "Adds 10 affiliate / referral tools (partners, commissions, bounties, payouts). Leave off if you don't run a referral program.",
       "required": false,
-      "default": "0"
+      "default": false
     }
   },
   "tools": [
@@ -152,6 +152,46 @@
     {
       "name": "revroute_ping",
       "description": "Health-check tool. Returns server version and config without calling the upstream API."
+    },
+    {
+      "name": "revroute_partner_create",
+      "description": "Invite or directly create a partner in the workspace's program. Requires enable_partners."
+    },
+    {
+      "name": "revroute_partner_list",
+      "description": "List partners in the workspace's program. Filter by status, country, group, or search query. Requires enable_partners."
+    },
+    {
+      "name": "revroute_partner_get",
+      "description": "Retrieve a partner by id, partnerId, or tenantId. Requires enable_partners."
+    },
+    {
+      "name": "revroute_partner_update",
+      "description": "Update partner fields including status (approve / ban / reject). Requires enable_partners."
+    },
+    {
+      "name": "revroute_commission_list",
+      "description": "List commissions for the program. Filter by partner, customer, status, or type. Requires enable_partners."
+    },
+    {
+      "name": "revroute_commission_update",
+      "description": "Update an individual commission — change status (approve / fraud / refund), amount, earnings, or description. Requires enable_partners."
+    },
+    {
+      "name": "revroute_bounty_list",
+      "description": "List bounties (one-off rewards) defined for the program. Requires enable_partners."
+    },
+    {
+      "name": "revroute_bounty_create",
+      "description": "Create a bounty (performance or submission type) for the program. Requires enable_partners."
+    },
+    {
+      "name": "revroute_payout_list",
+      "description": "List payouts. Filter by partner, status, or invoice. Requires enable_partners."
+    },
+    {
+      "name": "revroute_payout_create",
+      "description": "Initiate a payout to a partner. Billable, real-data only. Requires enable_partners. [DESTRUCTIVE]"
     }
   ],
   "keywords": [

@@ -9,6 +9,24 @@ upgrading.
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-05-15
+
+### Fixed
+- `tools/list` now emits JSON Schema **draft-07** (`http://json-schema.org/draft-07/schema#`)
+  for every tool's `inputSchema`. zod 4's default `z.toJSONSchema()` produces draft 2020-12,
+  which Claude for Windows 1.7196 silently drops when rendering Tool permissions — installed
+  extensions stayed hidden from the Connectors quick-menu with an empty permission list, even
+  though the server itself was healthy and `tools/list` returned successfully. Format now
+  matches the byte-for-byte structure of Anthropic's reference Filesystem extension.
+
+### Changed
+- `manifest_version` bumped `0.2` → `0.3` (current MCPB spec).
+- `user_config.enable_partners` changed from `type: "string"` (with `"0" / "1"` values) to
+  native `type: "boolean"` for a proper toggle UI. `REVROUTE_ENABLE_PARTNERS` env still
+  accepts `0`, `1`, `true`, `false` for backwards compatibility.
+- Manifest now declares all 46 tools including partner-program ones (was 36 — partner tools
+  were missing, causing a manifest-vs-runtime mismatch when `enable_partners` was on).
+
 ## [0.2.0] - 2026-05-15
 
 ### Added

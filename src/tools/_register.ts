@@ -49,10 +49,17 @@ export class ToolRegistry {
 
   bind(server: Server, contextFor: (req: CallToolRequest) => ToolContext): void {
     server.setRequestHandler(ListToolsRequestSchema, async () => ({
+      // Format matches the working Anthropic Filesystem extension byte-for-byte:
+      // only name/description/inputSchema, and inputSchema uses JSON Schema draft-07
+      // (not 2020-12). Claude for Windows 1.7196 silently drops tools whose schemas
+      // use draft 2020-12 — they never reach the Tool permissions UI.
       tools: this.list().map((t) => ({
         name: t.name,
         description: t.destructive ? `[DESTRUCTIVE] ${t.description}` : t.description,
-        inputSchema: z.toJSONSchema(t.inputSchema) as Record<string, unknown>,
+        inputSchema: z.toJSONSchema(t.inputSchema, { target: "draft-7" }) as Record<
+          string,
+          unknown
+        >,
       })),
     }));
 

@@ -13,3 +13,6 @@ coverage
 dxt-build/
 *.dxt
 *.mcpb
+
+# Local-only dumps from debugging sessions (tool list captures, extension backups)
+.local/
