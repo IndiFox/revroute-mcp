@@ -11,7 +11,7 @@ import {
   LinkUpsert,
 } from "../schemas/link.js";
 import type { Link } from "../types/revroute.js";
-import { type ToolRegistry, jsonContent } from "./_register.js";
+import { jsonContent, type ToolRegistry } from "./_register.js";
 
 function linkPath(
   id: string | undefined,

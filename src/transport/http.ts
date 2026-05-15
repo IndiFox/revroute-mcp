@@ -1,8 +1,8 @@
 import { randomUUID } from "node:crypto";
 import {
+  createServer as createHttpServer,
   type IncomingMessage,
   type ServerResponse,
-  createServer as createHttpServer,
 } from "node:http";
 
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";

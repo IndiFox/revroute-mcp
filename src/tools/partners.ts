@@ -11,7 +11,7 @@ import {
   PayoutListInput,
 } from "../schemas/partner.js";
 import type { Bounty, Commission, Partner, Payout } from "../types/revroute.js";
-import { type ToolRegistry, jsonContent } from "./_register.js";
+import { jsonContent, type ToolRegistry } from "./_register.js";
 
 // Partner-program endpoints in revroute are flat — there's no `/programs/{id}/...` prefix
 // and no list-programs API. Each workspace has a single implicit program, identified by

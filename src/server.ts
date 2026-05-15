@@ -3,7 +3,7 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { RevrouteClient } from "./client/http.js";
 import type { ResolvedConfig } from "./config.js";
 import { buildRegistry } from "./tools/index.js";
-import { type Logger, createLogger } from "./util/logger.js";
+import { createLogger, type Logger } from "./util/logger.js";
 
 export const SERVER_INFO = {
   name: "revroute-mcp",

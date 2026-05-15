@@ -8,7 +8,13 @@
   "bin": {
     "revroute-mcp": "dist/index.js"
   },
-  "files": ["dist", "README.md", "LICENSE", "CHANGELOG.md", "examples"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "examples"
+  ],
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsup",
@@ -67,7 +73,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.4.15",
     "@types/node": "^20.14.10",
     "msw": "^2.6.4",
     "tsup": "^8.3.5",
