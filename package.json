@@ -1,6 +1,6 @@
 {
   "name": "revroute-mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "MCP server for revroute.ru — manage short links and custom domains, read click and conversion analytics, run affiliate and referral programs (partners, commissions, bounties, payouts), and trigger conversion tracking from any LLM that speaks Model Context Protocol (Claude, Cursor, Claude Code, and more).",
   "type": "module",
   "main": "dist/index.js",
@@ -24,7 +24,8 @@
     "lint": "biome check .",
     "format": "biome format --write .",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm build && pnpm test"
+    "prepublishOnly": "pnpm build && pnpm test",
+    "dxt:pack": "node scripts/pack-dxt.mjs"
   },
   "keywords": [
     "mcp",
@@ -79,6 +80,7 @@
     "tsup": "^8.3.5",
     "tsx": "^4.19.2",
     "typescript": "^6.0.3",
-    "vitest": "^2.1.5"
+    "vite": "^6.4.2",
+    "vitest": "^4.1.6"
   }
 }

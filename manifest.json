@@ -1,0 +1,169 @@
+{
+  "manifest_version": "0.2",
+  "name": "revroute-mcp",
+  "display_name": "RevRoute",
+  "version": "0.2.0",
+  "description": "Manage revroute.ru short links, analytics, custom domains, customers, and affiliate / referral program from Claude.",
+  "long_description": "MCP server for revroute.ru. 36 core tools (links, analytics, domains, tags, folders, customers, events, metatags, QR, workspaces, conversion tracking) plus 10 optional partner-program tools (partners, commissions, bounties, payouts) when enabled.",
+  "author": {
+    "name": "IndiFox",
+    "url": "https://github.com/IndiFox/revroute-mcp"
+  },
+  "homepage": "https://revroute.ru",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IndiFox/revroute-mcp"
+  },
+  "license": "MIT",
+  "icon": "icon.png",
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"],
+      "env": {
+        "REVROUTE_API_KEY": "${user_config.api_key}",
+        "REVROUTE_API_BASE_URL": "${user_config.base_url}",
+        "REVROUTE_ENABLE_PARTNERS": "${user_config.enable_partners}"
+      }
+    }
+  },
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["win32", "darwin", "linux"],
+    "runtimes": {
+      "node": ">=20.0.0"
+    }
+  },
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "RevRoute API Key",
+      "description": "Workspace API key from revroute.ru settings.",
+      "required": true,
+      "sensitive": true
+    },
+    "base_url": {
+      "type": "string",
+      "title": "API base URL",
+      "description": "Override only for staging.",
+      "required": false,
+      "default": "https://app.revroute.ru/api"
+    },
+    "enable_partners": {
+      "type": "string",
+      "title": "Enable partner-program tools (0 or 1)",
+      "description": "Set to 1 to expose 10 affiliate/referral tools (partners, commissions, bounties, payouts).",
+      "required": false,
+      "default": "0"
+    }
+  },
+  "tools": [
+    { "name": "revroute_link_create", "description": "Create a new short link." },
+    {
+      "name": "revroute_link_upsert",
+      "description": "Create or update a short link in a single call."
+    },
+    {
+      "name": "revroute_link_list",
+      "description": "List short links with pagination and filters."
+    },
+    {
+      "name": "revroute_link_get",
+      "description": "Retrieve a single short link by id, externalId, or domain+key."
+    },
+    { "name": "revroute_link_update", "description": "Update fields on an existing short link." },
+    {
+      "name": "revroute_link_delete",
+      "description": "Permanently delete a short link. [DESTRUCTIVE]"
+    },
+    {
+      "name": "revroute_link_bulk_create",
+      "description": "Create up to 100 short links in a single request."
+    },
+    {
+      "name": "revroute_link_bulk_update",
+      "description": "Apply the same partial update to up to 100 links."
+    },
+    {
+      "name": "revroute_link_bulk_delete",
+      "description": "Permanently delete up to 100 short links. [DESTRUCTIVE]"
+    },
+    {
+      "name": "revroute_link_count",
+      "description": "Count short links with optional grouping by domain/tag/user."
+    },
+    {
+      "name": "revroute_analytics_query",
+      "description": "Aggregate analytics with configurable groupBy (count, timeseries, countries, devices, top_links, utm_*, etc.)."
+    },
+    { "name": "revroute_domain_create", "description": "Add a custom domain to the workspace." },
+    { "name": "revroute_domain_list", "description": "List domains attached to the workspace." },
+    { "name": "revroute_domain_update", "description": "Update a domain's settings." },
+    { "name": "revroute_domain_delete", "description": "Remove a custom domain. [DESTRUCTIVE]" },
+    {
+      "name": "revroute_domain_check_availability",
+      "description": "Check whether a domain slug is available."
+    },
+    { "name": "revroute_tag_create", "description": "Create a tag for organizing short links." },
+    { "name": "revroute_tag_list", "description": "List tags in the workspace." },
+    { "name": "revroute_tag_update", "description": "Rename or recolor a tag." },
+    { "name": "revroute_tag_delete", "description": "Delete a tag. [DESTRUCTIVE]" },
+    { "name": "revroute_folder_create", "description": "Create a folder for grouping links." },
+    { "name": "revroute_folder_list", "description": "List folders in the workspace." },
+    { "name": "revroute_folder_update", "description": "Rename a folder or change access level." },
+    { "name": "revroute_folder_delete", "description": "Delete a folder. [DESTRUCTIVE]" },
+    {
+      "name": "revroute_customer_create",
+      "description": "Create a customer record linked to an externalId."
+    },
+    { "name": "revroute_customer_list", "description": "List customers in the workspace." },
+    { "name": "revroute_customer_get", "description": "Retrieve a customer by id or externalId." },
+    { "name": "revroute_customer_update", "description": "Update fields on an existing customer." },
+    {
+      "name": "revroute_customer_delete",
+      "description": "Delete a customer record. [DESTRUCTIVE]"
+    },
+    {
+      "name": "revroute_event_list",
+      "description": "List raw click/lead/sale events with filters."
+    },
+    {
+      "name": "revroute_metatags_get",
+      "description": "Fetch og:title / og:description / og:image for a URL."
+    },
+    {
+      "name": "revroute_qr_generate",
+      "description": "Generate a QR code PNG for any URL (returned inline as base64)."
+    },
+    {
+      "name": "revroute_workspace_get",
+      "description": "Look up workspaces accessible by the API key."
+    },
+    {
+      "name": "revroute_track_lead",
+      "description": "Record a lead conversion event. Billable, real-data only. [DESTRUCTIVE]"
+    },
+    {
+      "name": "revroute_track_sale",
+      "description": "Record a sale conversion event. Billable, real-data only. [DESTRUCTIVE]"
+    },
+    {
+      "name": "revroute_ping",
+      "description": "Health-check tool. Returns server version and config without calling the upstream API."
+    }
+  ],
+  "keywords": [
+    "revroute",
+    "short-links",
+    "url-shortener",
+    "link-management",
+    "analytics",
+    "conversion-tracking",
+    "affiliate",
+    "referral",
+    "partner-program",
+    "qr-code"
+  ]
+}
