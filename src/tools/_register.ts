@@ -7,8 +7,7 @@ import {
   ListToolsRequestSchema,
   McpError,
 } from "@modelcontextprotocol/sdk/types.js";
-import type { z } from "zod";
-import { zodToJsonSchema } from "zod-to-json-schema";
+import { z } from "zod";
 
 import { toMcpError } from "../client/errors.js";
 import type { RevrouteClient } from "../client/http.js";
@@ -53,10 +52,7 @@ export class ToolRegistry {
       tools: this.list().map((t) => ({
         name: t.name,
         description: t.destructive ? `[DESTRUCTIVE] ${t.description}` : t.description,
-        inputSchema: zodToJsonSchema(t.inputSchema, {
-          $refStrategy: "none",
-          target: "openApi3",
-        }) as Record<string, unknown>,
+        inputSchema: z.toJSONSchema(t.inputSchema) as Record<string, unknown>,
       })),
     }));
 
