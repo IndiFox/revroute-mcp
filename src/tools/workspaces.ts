@@ -1,6 +1,6 @@
 import { WorkspaceGetInput } from "../schemas/workspace.js";
 import type { Workspace } from "../types/revroute.js";
-import { type ToolRegistry, jsonContent } from "./_register.js";
+import { jsonContent, type ToolRegistry } from "./_register.js";
 
 export function registerWorkspaceTools(reg: ToolRegistry): void {
   reg.define({

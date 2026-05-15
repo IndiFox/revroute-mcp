@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ToolRegistry, jsonContent } from "./_register.js";
+import { jsonContent, ToolRegistry } from "./_register.js";
 import { registerAnalyticsTools } from "./analytics.js";
 import { registerCustomerTools } from "./customers.js";
 import { registerDomainTools } from "./domains.js";

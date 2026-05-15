@@ -1,5 +1,5 @@
 import { TrackLeadInput, TrackSaleInput } from "../schemas/track.js";
-import { type ToolRegistry, jsonContent } from "./_register.js";
+import { jsonContent, type ToolRegistry } from "./_register.js";
 
 export function registerTrackTools(reg: ToolRegistry): void {
   reg.define({

@@ -5,7 +5,7 @@ import {
   FolderUpdateInput,
 } from "../schemas/folder.js";
 import type { Folder } from "../types/revroute.js";
-import { type ToolRegistry, jsonContent } from "./_register.js";
+import { jsonContent, type ToolRegistry } from "./_register.js";
 
 export function registerFolderTools(reg: ToolRegistry): void {
   reg.define({
